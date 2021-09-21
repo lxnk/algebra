@@ -1,0 +1,84 @@
+% !TEX spellcheck = en-UK
+% !TEX TS-program = pdflatex
+
+
+\documentclass[11pt,,amssymb]{amsart}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\title{Interval arithmetics}
+\author{The Author}
+%\date{}                                           % Activate to display a given date or no date
+
+\DeclareMathOperator{\till}{.\!.}
+
+\begin{document}
+
+\maketitle
+
+\section{Interval ring formulation}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\theoremstyle{plain}
+\newtheorem*{thm}{Theorem}
+  
+\begin{defn}[Formal interval]
+A set $I$, whose elements are called formal intervals, together with a value map $v : \mathbb{I} \to \mathbb{IK}$ and a representation map $r: \mathbb{IK} \to \mathbb{I}$, and operations $\circ \in \{+,-,\cdot\}$ is called an interval ring (over $\mathbb{K}$) if the following axioms hold.
+\end{defn}
+
+\begin{thm}[Nonnegative intervals]
+The set
+$$
+\mathbb{I} :=\{\langle a \rangle =\langle [\underline{x}\till\overline{x}],[\underline{y}\till\overline{y}] \rangle, \qquad 
+\underline{x}\leqslant \overline{x}\leqslant 0 \leqslant\underline{y}\leqslant\overline{y}\}
+$$
+becomes an interval ring with the definitions
+$$
+v\langle a \rangle = [\underline{x}\till\overline{x}] + [\underline{y}\till\overline{y}] = 
+[\underline{y}+\underline{x}\till \overline{y}+\overline{x}]
+$$
+Note that $\underline{y}+\underline{x} \leqslant \overline{y}+\overline{x}$
+and
+$$
+r[\underline{x}..\overline{x}] = 
+\begin{cases}
+\langle [0..0],[\underline{x}\till\overline{x}] \rangle & \text{if $0 \leqslant\underline{x}\leqslant\overline{x}$} \\
+\langle [\underline{x}\till\overline{x}],[0..0] \rangle & \text{if $\underline{x}\leqslant \overline{x}\leqslant 0$} \\
+\langle [\underline{x}\till0],[0\till\overline{x}] \rangle & \text{if $\underline{x}\leqslant 0\leqslant \overline{x}$}
+\end{cases}
+$$
+\end{thm}
+
+\begin{align}
+\langle [\underline{x}\till\overline{x}],[\underline{y}\till\overline{y}] \rangle + 
+\langle [\underline{p}\till\overline{p}],[\underline{q}\till\overline{q}] \rangle =
+\langle [\underline{x}+\underline{p}\till\overline{x}+\overline{p}],[\underline{y}+\underline{q}\till\overline{y}+\overline{q}] \rangle
+\\
+[\underline{y}+\underline{x}\till \overline{y}+\overline{x}] + 
+[\underline{q}+\underline{p}\till\overline{q}+\overline{p}] =
+[\underline{y}+\underline{q}+\underline{x}+\underline{p}\till\overline{y}+\overline{q} + \overline{x}+\overline{p}]
+\end{align}
+
+\begin{align}
+- \langle [\underline{x}\till\overline{x}],[\underline{y}\till\overline{y}] \rangle =
+\langle [-\overline{y}\till-\underline{y}], [-\overline{x}\till-\underline{x}] \rangle
+\\
+-[\underline{y}+\underline{x}\till \overline{y}+\overline{x}] = 
+[-\overline{y}-\overline{x} \till -\underline{y}-\underline{x}] 
+\end{align}
+
+
+\begin{align}
+\langle [\underline{x}\till\overline{x}],[\underline{y}\till\overline{y}] \rangle * 
+\langle [\underline{p}\till\overline{p}],[\underline{q}\till\overline{q}] \rangle =
+\langle [\underline{x}\overline{q} + \overline{y}\underline{p} \till\overline{x}\underline{q} + \underline{y}\overline{p}],
+[\underline{y}\underline{q}+\overline{x}\overline{p}\till\overline{y}\overline{q}+\underline{x}\underline{p}] \rangle
+\\
+[\underline{y}+\underline{x}\till \overline{y}+\overline{x}] * 
+[\underline{q}+\underline{p}\till\overline{q}+\overline{p}] =
+[\underline{y}+\underline{q}+\underline{x}+\underline{p}\till\overline{y}+\overline{q} + \overline{x}+\overline{p}]
+\end{align}
+
+
+\end{document}  
