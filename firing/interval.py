@@ -10,51 +10,46 @@ https://pyinterval.readthedocs.io/en/latest/guide.html
 https://conference.scipy.org/proceedings/scipy2008/paper_3/full_text.pdf
 """
 
-import numpy as np
-
-
-interval_ = np.dtype({'names': ['l','u'], 'formats': [np.float_, np.float_]})
-
-# def asinterval(c):
-#     if isinstance(type(c), Interval):
-#         return c
-#     else:
-#         return Interval(c, c)
-
-
-def interval(a: float = 0, b: float = 0):
-    return Interval(np.min((a,b)), np.max((a,b)))
-
 
 class AssignmentError(ArithmeticError):
     """Base class for exceptions in this module."""
     pass
 
 
-class Interval(np.ndarray):
+class Interval:
     """A numeric class that represent the interval [a..b] if a<=b and union [-inf..b]U[a..inf] if a>b
     """
-    pass
-    # def __repr__(self):
-    #     return f"Interval({self.a}, {self.b})"
-    #
-    # def __format__(self, format_spec):
-    #     if format_spec == '':
-    #         return f"❪{self.a}⠤{self.b}❫"
-    #     elif format_spec == 'ascii':
-    #         return f"({self.a}..{self.b})"
-    #     elif format_spec == 'unicode':
-    #         return f"〖{self.a}⠤{self.b}〗"
-    #
-    # def __str__(self):
-    #     return f"【{self.a}⠤{self.b}】"
-    #
-    # def __eq__(self, other):
-    #     return self.a == other.a and self.b == other.b
+    a: float = 0
+    b: float = 0
 
-    # def __add__(self, other):
-    #     # other = asinterval(other)
-    #     return Interval(self['l'] + other['l'], self['u'] + other['u'])
+    def __init__(self, a: float = 0, b: float = 0):
+        self.a, self.b = a, b
+
+    def __repr__(self):
+        return f"Interval({self.a}, {self.b})"
+
+    def __format__(self, format_spec):
+        if format_spec == '':
+            return f"❪{self.a}⠤{self.b}❫"
+        elif format_spec == 'ascii':
+            return f"({self.a}..{self.b})"
+        elif format_spec == 'unicode':
+            return f"〖{self.a}⠤{self.b}〗"
+
+    def __str__(self):
+        return f"【{self.a}⠤{self.b}】"
+
+    def __eq__(self, other):
+        return self.a == other.a and self.b == other.b
+
+    def __add__(self, other):
+        if isinstance(other, Interval):
+            a, b = other.a, other.b
+        elif isinstance(other, (int, float)):
+            a = b = other
+        else:
+            return ArithmeticError
+        return Interval(self.a + a, self.b + b)
     #
     # def __sub__(self, other):
     #     other = asinterval(other)
