@@ -2,12 +2,13 @@
 % !TEX TS-program = pdflatex
 
 
-\documentclass[11pt,,amssymb]{amsart}
+\documentclass[11pt]{amsart}
 \usepackage{amsthm}
+\usepackage{fullpage}
 \usepackage{amssymb}
 
 \title{Interval arithmetics}
-\author{The Author}
+\author{Alex Kashuba}
 %\date{}                                           % Activate to display a given date or no date
 
 \DeclareMathOperator{\till}{.\!.}
@@ -24,7 +25,7 @@
 \newtheorem*{thm}{Theorem}
   
 \begin{defn}[Formal interval]
-A set $I$, whose elements are called formal intervals, together with a value map $v : \mathbb{I} \to \mathbb{IK}$ and a representation map $r: \mathbb{IK} \to \mathbb{I}$, and operations $\circ \in \{+,-,\cdot\}$ is called an interval ring (over $\mathbb{K}$) if the following axioms hold.
+A set $I$, whose elements are called formal intervals, together with a value map $v : \mathbb{I} \to \mathbb{IK}$ and a representation map $r: \mathbb{IK} \to \mathbb{I}$, and operations $\circ \in \{+,-,\times\}$ is called an interval ring (over $\mathbb{K}$) if the following axioms hold.
 \end{defn}
 
 \begin{thm}[Nonnegative intervals]
@@ -41,9 +42,9 @@ $$
 Note that $\underline{y}+\underline{x} \leqslant \overline{y}+\overline{x}$
 and
 $$
-r[\underline{x}..\overline{x}] = 
+r[\underline{x}\till\overline{x}] = 
 \begin{cases}
-\langle [0..0],[\underline{x}\till\overline{x}] \rangle & \text{if $0 \leqslant\underline{x}\leqslant\overline{x}$} \\
+\langle [0\till0],[\underline{x}\till\overline{x}] \rangle & \text{if $0 \leqslant\underline{x}\leqslant\overline{x}$} \\
 \langle [\underline{x}\till\overline{x}],[0..0] \rangle & \text{if $\underline{x}\leqslant \overline{x}\leqslant 0$} \\
 \langle [\underline{x}\till0],[0\till\overline{x}] \rangle & \text{if $\underline{x}\leqslant 0\leqslant \overline{x}$}
 \end{cases}
@@ -70,14 +71,17 @@ $$
 
 
 \begin{align}
-\langle [\underline{x}\till\overline{x}],[\underline{y}\till\overline{y}] \rangle * 
+\langle [\underline{x}\till\overline{x}],[\underline{y}\till\overline{y}] \rangle \times 
 \langle [\underline{p}\till\overline{p}],[\underline{q}\till\overline{q}] \rangle =
 \langle [\underline{x}\overline{q} + \overline{y}\underline{p} \till\overline{x}\underline{q} + \underline{y}\overline{p}],
 [\underline{y}\underline{q}+\overline{x}\overline{p}\till\overline{y}\overline{q}+\underline{x}\underline{p}] \rangle
 \\
-[\underline{y}+\underline{x}\till \overline{y}+\overline{x}] * 
+[\underline{y}+\underline{x}\till \overline{y}+\overline{x}] \times 
 [\underline{q}+\underline{p}\till\overline{q}+\overline{p}] =
-[\underline{y}+\underline{q}+\underline{x}+\underline{p}\till\overline{y}+\overline{q} + \overline{x}+\overline{p}]
+[\min(A), \max(A)]
+\\
+A = \prod_{pair}  \{ (\underline{y}+\underline{x}),(\overline{y}+\overline{x});\,
+(\underline{q}+\underline{p}),(\overline{q}+\overline{p}) \}
 \end{align}
 
 
